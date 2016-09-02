@@ -111,7 +111,7 @@ def profile(query):
 	sector, industry, name = getStockInfo(query)
 	biteInfo = []
 	for bite in stockBiteInfo(query):
-		biteInfo.append([bite.replace("&#39;", "'"), fake.name()])
+		biteInfo.append([bite.replace("&#39;", "'").replace("&amp;", "&"), fake.name()])
 	print biteInfo
 	sectorData = Share(SECTORS[sector])
 	sectorName = SECTORS[sector]
