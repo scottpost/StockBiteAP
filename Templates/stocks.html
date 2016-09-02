@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>StockBite AP</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/one.style.css") }}">
+
+    <!-- CSS Footer -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/footers/footer-v7.css") }}">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/animate.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/line-icons/line-icons.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/font-awesome/css/font-awesome.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/pace/pace-flash.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/owl-carousel/owl.carousel.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/css/settings.css") }}">
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" id="style_color" href="{{ url_for('static', filename="assets/css/theme-colors/default.css") }}">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/custom.css") }}">
+</head>
+
+<!--
+The #page-top ID is part of the scrolling feature.
+The data-spy and data-target are part of the built-in Bootstrap scrollspy function.
+-->
+<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+    <!--=== Header ===-->
+    <nav class="one-page-header navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="menu-container page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="{{ url_for("index") }}">
+                    <span>S</span>tock<span>B</span>ite AP
+                    <!-- <img src="assets/img/logo1.png" alt="Logo"> -->
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div class="menu-container">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ url_for("analysts") }}">Analysts</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="{{ url_for("stocks") }}">Stocks</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="{{ url_for("faq") }}">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!--=== End Header ===-->
+
+    <!--=== Profile ===-->
+    <div style = "padding-top: 100px" class="container content profile">
+        <div class="row">
+            <!-- Profile Content -->
+            <div class="col-md-9" style = "padding-left: 100px; padding-right: 100px;">
+
+                <div class=" profile-body margin-bottom-20">
+                    <!--Profile Blog-->
+                    <h2 style = "text-align:center;color: #72c02c" class = "headline"><b>Most Bullish Stocks</b></h2>
+                    <div class="tag-box tag-box-v1 row margin-bottom-20">
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>FORD INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/ford" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">FORD</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>MICROSOFT</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/msft" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">MSFT</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>CEMTREX INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/cetx" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">CETX</button>
+                                </form>                           
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Profile Blog-->
+
+                    <div class="tag-box tag-box-v7 row margin-bottom-60">
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>FORD INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/ford" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">FORD</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>MICROSOFT</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/msft" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">MSFT</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>CEMTREX INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/cetx" class="form-inline">
+                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">CETX</button>
+                                </form>                           
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Profile Blog-->
+
+                    <div class="clearfix margin-bottom-20"></div>
+
+                    <h2 style = "text-align:center;color: red" class = "headline"><b>Most Bearish Stocks</b></h2>
+
+                    <div class="tag-box tag-box-v1-bear row margin-bottom-20">
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>FORD INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/ford" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">FORD</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>MICROSOFT</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/msft" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">MSFT</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>CEMTREX INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/cetx" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">CETX</button>
+                                </form>                           
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Profile Blog-->
+
+                    <div style = "text-align:center" class="tag-box tag-box-v7-bear row margin-bottom-20">
+                        <div class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>FORD INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/ford" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">FORD</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>MICROSOFT</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/msft" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">MSFT</button>
+                                </form>                           
+                            </div>
+                        </div>
+
+                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
+                            <div class="profile-blog">
+                                <div class="name-location">
+                                    <strong>CEMTREX INC.</strong>
+                                </div>
+                                <br>
+                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
+                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
+                                <p><b>Sentiment:</b> 67%</p>
+                                <br>
+                                <form action = "/profile/cetx" class="form-inline">
+                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">CETX</button>
+                                </form>                           
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Profile Blog-->
+                </div>
+            </div>
+            <!-- End Profile Content -->
+
+            <!--Left Sidebar-->
+            <div class="tag-box tag-box-v6 col-md-3">
+
+                <!-- Red Panel with Equal Height -->
+                <div class="panel panel-blue equal-height-column">
+                    <div class="panel-heading">
+                        <h3 style = "text-align:center" class = "panel-title"><b>Blue Chip Stocks</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <br>
+                        <div style = "text-align:center">
+                            <form action = "/profile/bac" class="form-inline">
+                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">BAC</button>
+                            </form>
+                            <br>                             
+                            <p><b>Price:</b> ${{ blueChips[0].get_price() }}</p>
+                            <p><b>Change:</b> {{ blueChips[0].get_change() }}%</p>
+                            <p><b>Sentiment:</b> 67%</p>
+                        </div>
+                        <hr>
+                        <div style = "text-align:center">
+                            <form action = "/profile/ford" class="form-inline">
+                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">KO</button>
+                            </form>
+                            <br>                             
+                            <p><b>Price:</b> ${{ blueChips[1].get_price() }}</p>
+                            <p><b>Change:</b> {{ blueChips[1].get_change() }}%</p>
+                            <p><b>Sentiment:</b> 67%</p>
+                        </div>
+                        <hr>
+                       
+                        <div style = "text-align:center">
+                            <form action = "/profile/ford" class="form-inline">
+                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">XOM</button>
+                            </form>
+                            <br>                             
+                            <p><b>Price:</b> ${{ blueChips[2].get_price() }}</p>
+                            <p><b>Change:</b> {{ blueChips[2].get_change() }}%</p>
+                            <p><b>Sentiment:</b> 67%</p>
+                        </div>
+                        <hr>
+                        <div style = "text-align:center">
+                            <form action = "/profile/ford" class="form-inline">
+                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">IBM</button>
+                            </form>
+                            <br>                             
+                            <p><b>Price:</b> ${{ blueChips[3].get_price() }}</p>
+                            <p><b>Change:</b> {{ blueChips[3].get_change() }}%</p>
+                            <p><b>Sentiment:</b> 67%</p>
+                        </div>
+                        <hr>
+                        <div style = "text-align:center">
+                            <form action = "/profile/ford" class="form-inline">
+                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">GM</button>
+                            </form>
+                            <br>                             
+                            <p><b>Price:</b> ${{ blueChips[4].get_price() }}</p>
+                            <p><b>Change:</b> {{ blueChips[4].get_change() }}%</p>
+                            <p><b>Sentiment:</b> 67%</p>
+                            <br>       
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- End Red Panel with Equal Height -->
+
+            </div>
+            <!--End Left Sidebar-->
+
+        </div><!--/end row-->
+    </div>
+    <!--=== End Profile ===-->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contacts-section">
+        <div class="copyright-section">
+            <p>StockBite Analytical Platform - 2015 &copy; All Rights Reserved - Scott Post
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+    <!-- JS Global Compulsory -->
+
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery-migrate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/bootstrap/js/bootstrap.min.js") }}"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="{{ url_for('static', filename="assets/plugins/smoothScroll.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery.easing.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/pace/pace.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery.parallax.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/counter/waypoints.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/counter/jquery.counterup.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/owl-carousel/owl.carousel.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js") }}"></script>
+
+    <!-- JS Page Level-->
+    <script src="{{ url_for('static', filename="assets/js/one.app.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/forms/login.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/forms/contact.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/pace-loader.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/owl-carousel.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/revolution-slider.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/cube-portfolio/cube-portfolio-lightbox.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery-migrate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/bootstrap/js/bootstrap.min.js") }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            App.init();
+            App.initCounter();
+            App.initParallaxBg();
+            LoginForm.initLoginForm();
+            ContactForm.initContactForm();
+            OwlCarousel.initOwlCarousel();
+            RevolutionSlider.initRSfullScreen();
+        });
+    </script>
+</body>
+</html>

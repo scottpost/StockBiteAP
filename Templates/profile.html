@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>StockBite AP</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/one.style.css") }}">
+
+    <!-- CSS Footer -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/footers/footer-v7.css") }}">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/animate.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/line-icons/line-icons.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/font-awesome/css/font-awesome.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/pace/pace-flash.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/owl-carousel/owl.carousel.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/css/settings.css") }}">
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" id="style_color" href="{{ url_for('static', filename="assets/css/theme-colors/default.css") }}">
+
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/custom.css") }}">
+</head>
+
+<!--
+The #page-top ID is part of the scrolling feature.
+The data-spy and data-target are part of the built-in Bootstrap scrollspy function.
+-->
+<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+    <!--=== Header ===-->
+    <nav class="one-page-header navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="menu-container page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="{{ url_for("index") }}">
+                    <span>S</span>tock<span>B</span>ite AP
+                    <!-- <img src="assets/img/logo1.png" alt="Logo"> -->
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div class="menu-container">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ url_for("analysts") }}">Analysts</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="{{ url_for("stocks") }}">Stocks</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="{{ url_for("faq") }}">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!--=== End Header ===-->
+
+    <!--=== Profile ===-->
+    <div style = "padding-top: 100px" class="container content profile">
+        <div class="row">
+            <!--Left Sidebar-->
+
+            <div class="tag-box tag-box-v1 col-sm-3 md-margin-bottom-40" style="padding-right: 25px">
+
+                <h1 style="text-transform:uppercase"> <b>${{ query }} </b></h1>
+
+                <h4 style="text-transform:uppercase"><b> {{ name }} </b></h4>
+
+                <hr>
+
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li style = "padding: 5px"class="list-group-item active">
+                        SECURITY INFORMATION
+                    </li>
+                    <li style = "padding: 10px"class="list-group-item">
+                        Price: <b>${{ queryData.get_price() }}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Day Change: <b>{{ '%0.2f'| format(queryData.get_change()|int / queryData.get_price()|int * 100) }}%</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Market Cap: <b>{{ queryData.get_market_cap() }}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        {% if queryData.get_dividend_yield() is not none %}   
+                            Dividend Yield: <b>{{ queryData.get_dividend_yield()}}%</b>
+                        {% else %}
+                            Dividend Yield: <b>N/A</b>
+                        {%endif %}
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Year Low | High: <b>${{ queryData.get_year_low()}} | ${{ queryData.get_year_high()}}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        50 | 200 Day Avg: <b>${{ queryData.get_50day_moving_avg()}} | ${{ queryData.get_200day_moving_avg()}}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        PE Ratio: <b>{{ queryData.get_price_earnings_ratio()}}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        PEG Ratio: <b>{{ queryData.get_price_earnings_growth_ratio()}}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Sector: <b>{{ sector }}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Industry: <b>{{ industry }}</b>
+                    </li>
+
+                </ul>
+
+                <hr>
+
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li style = "padding: 5px"class="list-group-item active">
+                        SECTOR ETF INFORMATION
+                    </li>
+                     <li style = "padding: 10px"class="list-group-item">
+                        Symbol: <b>{{ sectorName }}</b>
+                    </li>
+                    <li style = "padding: 10px"class="list-group-item">
+                        Price: <b>${{ sectorData.get_price() }}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Day Change: <b>{{ '%0.02f'| format(sectorData.get_change()|int / sectorData.get_price()|int * 100) }}%</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Year Low | High: <b>${{ sectorData.get_year_low()}} | ${{ sectorData.get_year_high()}}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        50 | 200 Day Avg: <b>${{ sectorData.get_50day_moving_avg()}} | ${{ sectorData.get_200day_moving_avg()}}</b>
+                    </li>
+                </ul>
+
+                <hr>
+
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li style = "padding: 5px"class="list-group-item active">
+                        SECURITY VS SECTOR ETF
+                    </li>
+                    <li style = "padding: 10px"class="list-group-item">
+                        Avg Day Change: <b>{{ sectorName }}</b>
+                    </li>
+                    <li style = "padding: 10px"class="list-group-item">
+                        Avg Market Cap: <b>{{ sectorName }}</b>
+                    </li>
+                    <li style = "padding: 10px"class="list-group-item">
+                        Avg PE Ratio: <b>${{ sectorData.get_price() }}</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Avg PEG Ratio: <b>{{ '%0.02f'| format(sectorData.get_change()|int / sectorData.get_price()|int * 100) }}%</b>
+                    </li>
+                    <li style = "padding: 10px" class="list-group-item">
+                        Avg Sentiment: <b>${{ sectorData.get_year_low()}} | ${{ sectorData.get_year_high()}}</b>
+                    </li>
+                </ul>
+            </div>
+            <!--End Left Sidebar-->
+
+            <!-- Profile Content -->
+            <div style="padding-left: 25px" class="col-sm-9">
+                <form style="display:inline-block;text-align: right;" action = "{{ url_for('index') }}" class="form-inline" method="post">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input style="text-transform:uppercase; background-color: rgba(0,0,0,0) !important; border-color: #72c02c;" type="text" class="form-control" name="stockTicker">
+                    </div>
+                  </div>
+                  <button style = "padding: 5px; position: relative; top:2px;"type="submit" class="btn-u btn-brd btn-brd-hover">SEARCH</button>
+                </form>
+                <hr>
+                <h1 style = "text-align:center"><b>Crowdsourced Investment Sentiment:</b></h1>
+                <h1 style = "color: red; text-align:center"><b>BEARISH</b></h1>
+                <hr>
+                <div class="profile-body">
+                    <!--Service Block v3-->
+                    <div class="row margin-bottom-10">
+                        <div class="col-sm-6 sm-margin-bottom-20">
+                            <div class="service-block-v3 service-block-u">
+                                <i class="icon-graph"></i>
+                                <h2 style = "color:white">BULLISH</h2>
+
+                                <div class="clearfix margin-bottom-10"></div>
+
+                                <div class="statistics">
+                                <h3 class="heading-xs">Bullish Sentiment <span class="pull-right">33%</span></h3>
+                                    <div class="progress progress-u progress-xxs">
+                                        <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="33" role="progressbar" class="progress-bar progress-bar-light">
+                                        </div>
+                                    </div>
+                                    <small>11% lower <strong>than last month</strong></small>
+                                </div>
+
+                                <div class="clearfix margin-bottom-20"></div>
+
+                                <div class="row">
+                                    <div class="col-xs-6 service-in">
+                                        <small>Last Week</small>
+                                        <h4 class="counter">{{number}}</h4>
+                                    </div>
+                                    <div class="col-xs-6 text-right service-in">
+                                        <small>Last Month</small>
+                                        <h4 class="counter">{{number}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="service-block-v3 service-block-red">
+                                <i style = "transform: rotate(45deg);" class="icon-graph"></i>
+                                <h2 style = "color:white">BEARISH</h2>
+                                <div class="clearfix margin-bottom-10"></div>
+
+                                <div class="statistics">
+                                <h3 class="heading-xs">Bearish Sentiment<span class="pull-right">67%</span></h3>
+                                    <div class="progress progress-u progress-xxs">
+                                        <div style="width: 67%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                        </div>
+                                    </div>
+                                    <small>15% higher <strong>than last month</strong></small>
+                                </div>
+                                <div class="clearfix margin-bottom-20"></div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6 service-in">
+                                        <small>Last Week</small>
+                                        <h4 class="counter">26,904</h4>
+                                    </div>
+                                    <div class="col-xs-6 text-right service-in">
+                                        <small>Last Month</small>
+                                        <h4 class="counter">124,766</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+                    <!--End Service Block v3-->
+
+                    <hr>
+                    <div style = "text-align:center" class = "row margin-bottom-20">
+                        
+                        <div class="col-sm-6">
+                            <h5><b>Monthly Sentiment</b></h5>
+                            <br>
+                            <img src = "{{ G[0] ~ ""}}" id="chart" width = "100%"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5><b>Bites Volume</b></h5>
+                            <br>
+                            <img src = "{{ G[1] ~ ""}}" id="chart" width = "100%"/>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row margin-bottom-20">
+                        <!--Profile Post-->
+                        <div class="col-sm-6">
+                                <div style="padding-left:10px;padding-right:10px;" class="panel-profile no-bg">
+                                    <h3><b>Recent <span style = "text-transform: uppercase">{{query}}</span> Bites</b></h3>
+                                    <div id="scrollbar" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-light">
+                                        {% for bite in biteInfo %}
+                                        <div class="profile-post color-one">
+                                            <div class="profile-post-in">
+                                                <h3 style="text-align:justify" class="heading-xs"><a href="{{ url_for("analysts") }}">{{bite[1]}}</a></h3>
+                                                <p style="text-align:justify">{{bite[0]}}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </div>
+                        <div style = "text-align:center; padding-bottom: 0px" class="col-sm-6">
+                            <h5><b>Trading Volume</b></h5>
+                            <br>
+                            <img src = "{{ G[1] ~ ""}}" id="chart" width = "100%"/>
+                            <hr>
+                        </div>
+
+                        <div class = "col-sm-6">
+                            <h3><b><span style = "text-transform:uppercase">{{ query }}</span> Indicators</b></h3>
+                            <ul class="list-group sidebar-nav-v1 margin-bottom-20" id="sidebar-nav-1">
+                                <li style = "padding: 10px"class="list-group-item">
+                                   <strong>B. Graham Valuation:</strong> <b style = "float: right;color: #72c02c">BUY</b>
+                                </li>
+                                <li style = "padding: 10px" class="list-group-item">
+                                    <strong>Dividend Discount:</strong> <b style = "float: right;color: red">SELL</b>
+                                </li>
+                                <li style = "padding: 10px"class="list-group-item">
+                                   <strong>MA:</strong> <b style = "float: right;color: #72c02c">BUY</b>
+                                </li>
+                                <li style = "padding: 10px" class="list-group-item">
+                                    <strong>MRE:</strong> <b style = "float: right;color: red">SELL</b>
+                                </li>
+                                <li style = "padding: 10px" class="list-group-item">
+                                    <strong>MACD:</strong> <b style = "float: right;color: #72c02c">BUY</b>
+                                </li>
+                                <li style = "padding: 10px" class="list-group-item">
+                                    <strong>A/D Line:</strong> <b style = "float: right;color: #72c02c">BUY</b>
+                                </li>
+                            </ul>
+                                                                
+
+                        </div>
+                        <!--End Profile Post-->
+                    </div><!--/end row-->
+                </div>
+            </div>
+            <!-- End Profile Content -->
+        </div>
+    </div><!--/container-->
+    <!--=== End Profile ===-->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contacts-section">
+        <div class="copyright-section">
+            <p>StockBite Analytical Platform - 2015 &copy; All Rights Reserved - Scott Post
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+    <!-- JS Global Compulsory -->
+
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery-migrate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/bootstrap/js/bootstrap.min.js") }}"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="{{ url_for('static', filename="assets/plugins/smoothScroll.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery.easing.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/pace/pace.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery.parallax.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/counter/waypoints.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/counter/jquery.counterup.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/owl-carousel/owl.carousel.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js") }}"></script>
+
+    <!-- JS Page Level-->
+    <script src="{{ url_for('static', filename="assets/js/one.app.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/forms/login.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/forms/contact.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/pace-loader.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/owl-carousel.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/revolution-slider.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/js/plugins/cube-portfolio/cube-portfolio-lightbox.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery-migrate.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="assets/plugins/bootstrap/js/bootstrap.min.js") }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            App.init();
+            App.initCounter();
+            App.initParallaxBg();
+            LoginForm.initLoginForm();
+            ContactForm.initContactForm();
+            OwlCarousel.initOwlCarousel();
+            RevolutionSlider.initRSfullScreen();
+        });
+    </script>
+</body>
+</html>
