@@ -41,7 +41,10 @@ BLUECHIPS = ["BAC", "KO", "XOM", "IBM", "DIS"]
 #==================================================================================================================================
 
 def getStockInfo(name):
-  return "Healthcare", "Industry", "Name"
+  tree = parse(urlopen('http://www.google.com/finance?&q='+name))
+  sector = tree.xpath("//a[@id='sector']")[0].text 
+  industry = tree.xpath("//a[@id='sector']")[0].getnext().text
+  return sector, industry, "Name"
 
 def drawGraphs(query, queryData, sector, sectorData):
 	#Initialize variables

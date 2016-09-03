@@ -97,50 +97,19 @@ def neutralRemover(message):
 #    \__| \_/\_/ |_|\__|\__\___|_| 
 #  
 
-#A custom Listener class for Twitter Stream data
-class MyListener(StreamListener):
-
-    #Close stream after 1 minute of listening
-    timeOut = time.time() + 60
-    
-    #Called with each succesful query
-    def on_status(self, status):
-        while time.time() < MyListener.timeOut:
-            try:
-                #Extract info from status
-                message = status.text
-                author = status.author.name
-                date = "{:%m/%d/%y}".format(status.created_at)
-                print "here"
-                #Add info to SQL Database
-                if neutralRemover(message) != 0:
-                    print "really here"
-                    cur.execute("INSERT OR IGNORE INTO bites VALUES(?, ?, ?, ?, ?)", ("STREAM", message, author, date, neutralRemover(message)))
-                con.commit()
-                return True
-            except BaseException as e:
-                print("Error on_status: %s" % str(e))
-        return False
-
-    #Called with each unsuccesful query
-    def on_error(self, status):
-        print(status)
-        return True
-
-#Opens a new Twitter Stream and listens for tweets containing QUERY
-def queryTwitterStream(query):
-    twitter_stream = Stream(auth, MyListener())
-    twitter_stream.filter(track = query[:400])
-
 #Accesses the 30 most recent tweets containing QUERY
-def queryTwitterLog(query): 
-    for tweet in tweepy.Cursor(api.search, q=query, lang="en").items(50): 
+def queryTwitterLog(query):
+    print "made it inside" 
+    for tweet in tweepy.Cursor(api.search, q=query, lang="en").items(30): 
+        print "there are tweets"
         message = tweet.text
         message = re.sub(r'^https?:\/\/.*[\r\n]*', '', message, flags=re.MULTILINE)
         author = tweet.user.name
         date = "{:%m/%d/%y}".format(tweet.created_at)
+        print "lol"
         neutral = neutralRemover(message)
         if neutral != 0:
+            print "here"
             cur.execute("INSERT OR IGNORE INTO bites VALUES(?, ?, ?, ?, ?)", (query[1:], message, author, date, neutral))
     con.commit()
 
@@ -165,7 +134,8 @@ def queryStockTwitsLog(query):
             date = datetime.strftime(dateObj, "%m/%d/%y")
             neutral = neutralRemover(message)
             if neutral != 0:
-                cur.execute("INSERT OR IGNORE INTO bites VALUES(?, ?, ?, ?, ?)", (query, message, author, date, str(neutral))
+                print "here"
+                cur.execute("INSERT OR IGNORE INTO bites VALUES (?, ?, ?, ?, ?)", (query, message, author, date, str(neutral)))
         con.commit()
     except IndexError:
         print 'Ticker could not be found in the StockTwit database.'
@@ -212,18 +182,16 @@ if __name__ == "__main__":
     print
     print 'Querying Logs...'
     #Query the twitter & stocktwits logs (30 most recent "important" tweets)
-    for stock in STOCKS[300:]:
+    for stock in STOCKS:
         try:
             queryTwitterLog(stock)
-            print "twit"
+            print "twitter"
             queryStockTwitsLog(stock[1:])
+            print "stocktwits"
             print 'Queried ' + stock
-        except:
-            break;
-    print 'Querying Twitter Stream...'
-    #Listen to the twitter stream for 15 minutes (due to limited CPU usage can't listen for full hour)
-    queryTwitterStream(STOCKS)
-    print
+        except Exception, e: 
+            print str(e)
+            continue
     print "...QUERY COMPLETED"
 
 #==================================================================================================================================
