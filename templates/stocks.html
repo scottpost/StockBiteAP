@@ -37,6 +37,7 @@
 
     <!-- CSS Theme -->
     <link rel="stylesheet" id="style_color" href="{{ url_for('static', filename="assets/css/theme-colors/default.css") }}">
+    <link rel="stylesheet" id="style_color" href="{{ url_for('static', filename="assets/css/pages/page_search.css") }}">
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="{{ url_for('static', filename="assets/css/custom.css") }}">
@@ -146,57 +147,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                     </div><!--/end row-->
                     <!--End Profile Blog-->
 
-                    <div class="tag-box tag-box-v7 row margin-bottom-60">
-                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>FORD INC.</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/ford" class="form-inline">
-                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">FORD</button>
-                                </form>                           
-                            </div>
-                        </div>
-
-                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>MICROSOFT</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/msft" class="form-inline">
-                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">MSFT</button>
-                                </form>                           
-                            </div>
-                        </div>
-
-                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>CEMTREX INC.</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/cetx" class="form-inline">
-                                    <button type="submit" class="btn-u btn-brd btn-brd-hover">CETX</button>
-                                </form>                           
-                            </div>
-                        </div>
-                    </div><!--/end row-->
-                    <!--End Profile Blog-->
-
                     <div class="clearfix margin-bottom-20"></div>
 
                     <h2 style = "text-align:center;color: red" class = "headline"><b>Most Bearish Stocks</b></h2>
@@ -252,56 +202,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                     </div><!--/end row-->
                     <!--End Profile Blog-->
 
-                    <div style = "text-align:center" class="tag-box tag-box-v7-bear row margin-bottom-20">
-                        <div class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>FORD INC.</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/ford" class="form-inline">
-                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">FORD</button>
-                                </form>                           
-                            </div>
-                        </div>
-
-                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>MICROSOFT</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/msft" class="form-inline">
-                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">MSFT</button>
-                                </form>                           
-                            </div>
-                        </div>
-
-                        <div style = "text-align:center" class="col-sm-4 sm-margin-bottom-20">
-                            <div class="profile-blog">
-                                <div class="name-location">
-                                    <strong>CEMTREX INC.</strong>
-                                </div>
-                                <br>
-                                <p><b>Price:</b> ${{ sectorData.get_price() }}</p>
-                                <p><b>Change:</b> {{ sectorData.get_change() }}%</p>
-                                <p><b>Sentiment:</b> 67%</p>
-                                <br>
-                                <form action = "/profile/cetx" class="form-inline">
-                                    <button type="submit" class="btn-u btn-u-red btn-brd btn-brd-hover">CETX</button>
-                                </form>                           
-                            </div>
-                        </div>
-                    </div><!--/end row-->
-                    <!--End Profile Blog-->
+                    
                 </div>
             </div>
             <!-- End Profile Content -->
@@ -346,27 +247,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <p><b>Change:</b> {{ blueChips[2].get_change() }}%</p>
                             <p><b>Sentiment:</b> 67%</p>
                         </div>
-                        <hr>
-                        <div style = "text-align:center">
-                            <form action = "/profile/ford" class="form-inline">
-                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">IBM</button>
-                            </form>
-                            <br>                             
-                            <p><b>Price:</b> ${{ blueChips[3].get_price() }}</p>
-                            <p><b>Change:</b> {{ blueChips[3].get_change() }}%</p>
-                            <p><b>Sentiment:</b> 67%</p>
-                        </div>
-                        <hr>
-                        <div style = "text-align:center">
-                            <form action = "/profile/ford" class="form-inline">
-                                <button type="submit" class="btn-u btn-u-blue btn-brd btn-brd-hover">GM</button>
-                            </form>
-                            <br>                             
-                            <p><b>Price:</b> ${{ blueChips[4].get_price() }}</p>
-                            <p><b>Change:</b> {{ blueChips[4].get_change() }}%</p>
-                            <p><b>Sentiment:</b> 67%</p>
-                            <br>       
-                        </div>
+                        
 
 
                     </div>

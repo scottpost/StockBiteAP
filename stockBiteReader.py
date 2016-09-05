@@ -99,18 +99,15 @@ def neutralRemover(message):
 
 #Accesses the 30 most recent tweets containing QUERY
 def queryTwitterLog(query):
-    print "made it inside" 
     for tweet in tweepy.Cursor(api.search, q=query, lang="en").items(30): 
-        print "there are tweets"
         message = tweet.text
         message = re.sub(r'^https?:\/\/.*[\r\n]*', '', message, flags=re.MULTILINE)
         author = tweet.user.name
         date = "{:%m/%d/%y}".format(tweet.created_at)
-        print "lol"
         neutral = neutralRemover(message)
         if neutral != 0:
-            print "here"
             cur.execute("INSERT OR IGNORE INTO bites VALUES(?, ?, ?, ?, ?)", (query[1:], message, author, date, neutral))
+            print message  
     con.commit()
 
 #        _             _    _____          _ _       
@@ -134,8 +131,9 @@ def queryStockTwitsLog(query):
             date = datetime.strftime(dateObj, "%m/%d/%y")
             neutral = neutralRemover(message)
             if neutral != 0:
-                print "here"
                 cur.execute("INSERT OR IGNORE INTO bites VALUES (?, ?, ?, ?, ?)", (query, message, author, date, str(neutral)))
+                print message
+
         con.commit()
     except IndexError:
         print 'Ticker could not be found in the StockTwit database.'
@@ -184,10 +182,8 @@ if __name__ == "__main__":
     #Query the twitter & stocktwits logs (30 most recent "important" tweets)
     for stock in STOCKS:
         try:
-            queryTwitterLog(stock)
-            print "twitter"
+            #queryTwitterLog(stock)
             queryStockTwitsLog(stock[1:])
-            print "stocktwits"
             print 'Queried ' + stock
         except Exception, e: 
             print str(e)

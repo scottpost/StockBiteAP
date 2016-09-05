@@ -46,7 +46,7 @@
 The #page-top ID is part of the scrolling feature.
 The data-spy and data-target are part of the built-in Bootstrap scrollspy function.
 -->
-<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+<body style = "background-color: #F5FFFA"  id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
     <!--=== Header ===-->
     <nav class="one-page-header navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -74,9 +74,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <li class="page-scroll">
                             <a href="{{ url_for("stocks") }}">STOCKS</a>
                         </li>
-                        <li class="page-scroll">
-                            <a href="{{ url_for("faq") }}">FAQ</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -86,84 +83,30 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     </nav>
     <!--=== End Header ===-->
 
-    <!-- Intro Section -->
-    <section id="intro" class="intro-section">
-        <div class="fullscreenbanner-container">
-            <div class="fullscreenbanner">
-                <ul>
-                    <!-- SLIDE 1 -->
-                    <li data-transition="curtain-3" data-slotamount="1" data-masterspeed="1000" data-title="Slide 1">
-                        <!-- MAIN IMAGE -->
+    <!--=== Search Block ===-->
+    <div class="search-block">
+        <div class="container" style = "padding-top: 20%">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Tap into the market's <span class="color-green">pulse</span></h1>
 
-                        <img src="{{ url_for('static', filename="2.jpg" ) }}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-
-                        <!-- LAYERS -->
-
-                        <div class="tp-caption rs-caption-1 sft"
-                            data-x="center"
-                            data-hoffset="0"
-                            data-y="100"
-                            data-speed="800"
-                            data-start="2000"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300">
-                            CROWDSOURCED STOCK INVESTING
-                        </div>
-
-                        <!-- LAYER -->
-                        <div class="tp-caption rs-caption-2 sft"
-                            data-x="center"
-                            data-hoffset="0"
-                            data-y="240"
-                            data-speed="1000"
-                            data-start="3000"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="300"
-                            data-endeasing="Power1.easeIn"
-                            data-captionhidden="off"
-                            style="z-index: 6">
-                            Aggregated analysis platform using <br>
-                            millions of anonymous stock predictions. <br>
-                        </div>
-
-                        <!-- LAYER -->
-                        <div class="tp-caption rs-caption-3 sft"
-                            data-x="center"
-                            data-hoffset="0"
-                            data-y="400"
-                            data-speed="800"
-                            data-start="3500"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="300"
-                            data-endeasing="Power1.easeIn"
-                            data-captionhidden="off"
-                            style="z-index: 6">
-                            <form action = "{{ url_for('index') }}" class="form-inline" method="post">
-                              <div class="form-group">
-                                <div class="input-group">
-                                  <input style="text-transform:uppercase; background-color: rgba(0,0,0,0) !important; color: white; border-color: white;" type="text" placeholder= "ex. AAPL" class="form-control" name="stockTicker">
-                                </div>
-                              </div>
-                              <button style = "padding: 6px; position: relative; top:2px;"type="submit" class="btn-u btn-brd btn-brd-hover btn-u-light">SEARCH</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-                <div class="tp-bannertimer tp-bottom"></div>
-                <div class="tp-dottedoverlay twoxtwo"></div>
+                <form style = "margin-bottom: 15px" action = "{{ url_for('index') }}" method="post" class="">
+                    <div class="input-group">
+                        <input autocomplete="off" type="text" class="form-control" placeholder="Ex. AAPL" name = "stockTicker">
+                        <span class="input-group-btn">
+                            <button class="btn-u" value = "Search" type="submit"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <h4>Trending searches: 
+                    <a href = "www.google.com"><span style = "margin-left: 15px" class="badge rounded badge-red">CETX</span><a>
+                    <a href = "www.google.com"><span class="badge rounded badge-blue">AMZN</span><a>
+                    <a href = "www.google.com"><span class="badge rounded badge-yellow">FB</span><a>
+                     <a href = "www.google.com"><span class="badge rounded badge-green">TASR</span><a>
+                </h4>
             </div>
         </div>
-    </section>
-    <!-- End Intro Section -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contacts-section">
-        <div class="copyright-section">
-            <p>StockBite Analytical Platform - 2015 &copy; All Rights Reserved - Scott Post
-        </div>
-    </section>
-    <!-- End Contact Section -->
-
+    </div><!--/container-->
+</div>
     <!-- JS Global Compulsory -->
 
     <script src="{{ url_for('static', filename="assets/plugins/jquery/jquery.min.js") }}"></script>

@@ -11,6 +11,7 @@ from faker import Faker
 from datetime import date, timedelta
 from bs4 import BeautifulSoup
 from lxml.html import parse
+import csv
 
 
 #==================================================================================================================================
@@ -41,10 +42,17 @@ BLUECHIPS = ["BAC", "KO", "XOM", "IBM", "DIS"]
 #==================================================================================================================================
 
 def getStockInfo(name):
+  company = ""
+  with open('sp500.csv', 'rb') as csvfile:
+    csvReader = csv.reader(csvfile, delimiter=',')
+    for row in csvReader:
+    	print row
+    	if row[0] == name.upper():
+    		company = row[1]
   tree = parse(urlopen('http://www.google.com/finance?&q='+name))
   sector = tree.xpath("//a[@id='sector']")[0].text 
   industry = tree.xpath("//a[@id='sector']")[0].getnext().text
-  return sector, industry, "Name"
+  return sector, industry, company
 
 def drawGraphs(query, queryData, sector, sectorData):
 	#Initialize variables
@@ -54,22 +62,28 @@ def drawGraphs(query, queryData, sector, sectorData):
 	dataset3 = []
 
 	#Calculate correct dates for x-axis of graphs
-	week4 = date.today()
-	week3 = week4 - timedelta(days=7)
-	week2 = week3 - timedelta(days=7)
-	week1 = week2 - timedelta(days=7)
-	w4 = week4.strftime('%d-%m-%y')
-	w3 = week3.strftime('%d-%m-%y')
-	w2 = week2.strftime('%d-%m-%y')
-	w1 = week1.strftime('%d-%m-%y')
+	today = date.today()
+	minus1 = today - timedelta(days=1)
+	minus2 = today - timedelta(days=2)
+	minus3 = today - timedelta(days=3)
+	minus4 = today - timedelta(days=4)
+	minus5 = today - timedelta(days=5)
+	minus6 = today - timedelta(days=6)
+	t = today.strftime('%d-%m-%y')
+	m1 = minus1.strftime('%d-%m-%y')
+	m2 = minus2.strftime('%d-%m-%y')
+	m3 = minus3.strftime('%d-%m-%y')
+	m4 = minus4.strftime('%d-%m-%y')
+	m5 = minus5.strftime('%d-%m-%y')
+	m6 = minus6.strftime('%d-%m-%y')
 
 	#Gather trading volume data
-	for tick in queryData.get_historical(week1.strftime('%Y-%m-%d'), week4.strftime('%Y-%m-%d')):
+	for tick in queryData.get_historical(minus6.strftime('%Y-%m-%d'), today.strftime('%Y-%m-%d')):
 		dataset1.append(int(tick['Volume']))
 
 	maxData = max(dataset1)
-	G1 = GChart('lc', dataset1).axes.type('xy').axes.label(1, "0% ", "25% ", "50% ", "75% ", "100% ").label(w1, w2, w3, w4).axes.tick(1,20).size(400, 200).color('72c02c').scale(0, max(dataset1))
-	G2 = GChart('lc', dataset1).axes.type('xy').axes.label(1, 0, "{:,}".format(maxData/4), "{:,}".format(maxData/2), "{:,}".format(3 * maxData/4), "{:,}".format(maxData)).label(w1, w2, w3, w4).axes.tick(1,20).size(400, 200).scale(0, maxData).color('72c02c')
+	G1 = GChart('lc', dataset1).axes.type('xy').axes.label(1, "0% ", "25% ", "50% ", "75% ", "100% ").label(m6, m5, m4, m3, m2, m1, t).axes.tick(1,20).size(400, 200).color('72c02c').scale(0, max(dataset1))
+	G2 = GChart('lc', dataset1).axes.type('xy').axes.label(1, 0, "{:,}".format(maxData/4), "{:,}".format(maxData/2), "{:,}".format(3 * maxData/4), "{:,}".format(maxData)).label(m6, m5, m4, m3, m2, m1, t).axes.tick(1,20).size(400, 200).scale(0, maxData).color('72c02c')
 
 	GList.extend([G1, G2])
 	return GList
